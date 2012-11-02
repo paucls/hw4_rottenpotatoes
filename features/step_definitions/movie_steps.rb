@@ -46,3 +46,11 @@ Then /^I should see only movies with ratings: (.*)$/ do |rating_list|
   rows = page.all('table#movies tbody tr').count
   rows.should == movies
 end
+
+#
+# HW4 Steps
+#
+Then /^the director of "([^"]*)" should be "([^"]*)"$/ do |title, director|
+  regexp = /#{title}.*#{director}/m
+  page.body.should =~ regexp
+end
