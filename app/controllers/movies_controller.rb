@@ -64,4 +64,15 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
 
+  def find_similar_movies
+    id = params[:id]
+    @movie = Movie.find(id)
+    begin
+      @movies = @movie.find_by_same_director
+    rescue ArgumentError
+      flash[:notice] = "'#{@movie.title}' has no director info."
+      redirect_to movies_path
+    end
+  end
+
 end
